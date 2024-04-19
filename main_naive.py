@@ -38,7 +38,7 @@ def main():
     for task_idx, (train_dataset, task_info) in enumerate(protocol):
         print('Classes in this batch:', task_info.classes_in_this_task)
 
-        train_loader = DataLoader(train_dataset, batch_size=128, shuffle=True, num_workers=4)
+        train_loader = DataLoader(train_dataset, batch_size=128, shuffle=True, num_workers=0)
 
         optimizer = torch.optim.Adam(model.parameters())
         criterion = torch.nn.CrossEntropyLoss()

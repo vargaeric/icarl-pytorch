@@ -150,7 +150,7 @@ def main():
                                              transform=transform_prototypes, target_transform=None)
             train_dataset = ConcatDataset((train_dataset, protoset))
 
-        train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=8)
+        train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=0)
 
         # Line 137: # Launch the training loop
         # From lines: 69, 70, 76, 77
@@ -166,7 +166,7 @@ def main():
         acc_result, val_err, _, _ = get_accuracy(model, task_info.get_current_test_set(), device=device,
                                                  required_top_k=[1, 5], return_detailed_outputs=False,
                                                  criterion=BCELoss(), make_one_hot=True, n_classes=100,
-                                                 batch_size=batch_size, shuffle=False, num_workers=8)
+                                                 batch_size=batch_size, shuffle=False, num_workers=0)
         print("Before first epoch")
         print("  validation loss:\t\t{:.6f}".format(val_err))  # Note: already averaged
         print("  top 1 accuracy:\t\t{:.2f} %".format(acc_result[0].item() * 100))
@@ -214,7 +214,7 @@ def main():
             acc_result, val_err, _, _ = get_accuracy(model, task_info.get_current_test_set(),  device=device,
                                                      required_top_k=[1, 5], return_detailed_outputs=False,
                                                      criterion=BCELoss(), make_one_hot=True, n_classes=100,
-                                                     batch_size=batch_size, shuffle=False, num_workers=8)
+                                                     batch_size=batch_size, shuffle=False, num_workers=0)
 
             # Lines 188-202: Then we print the results for this epoch:
             print("Batch of classes {} out of {} batches".format(
@@ -338,12 +338,12 @@ def main():
         top1_acc_list_ori = icarl_accuracy_measure(task_info.get_task_test_set(0), class_means, val_fn,
                                                    top1_acc_list_ori, task_idx, 0, 'original',
                                                    make_one_hot=True, n_classes=100,
-                                                   batch_size=batch_size, num_workers=8)
+                                                   batch_size=batch_size, num_workers=0)
 
         top1_acc_list_cumul = icarl_accuracy_measure(task_info.get_cumulative_test_set(), class_means, val_fn,
                                                      top1_acc_list_cumul, task_idx, 0, 'cumul of',
                                                      make_one_hot=True, n_classes=100,
-                                                     batch_size=batch_size, num_workers=8)
+                                                     batch_size=batch_size, num_workers=0)
     # Final save of the data
     torch.save(top1_acc_list_cumul, 'top1_acc_list_cumul_icarl_cl' + str(nb_cl))
     torch.save(top1_acc_list_ori, 'top1_acc_list_ori_icarl_cl' + str(nb_cl))
