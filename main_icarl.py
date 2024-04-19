@@ -32,7 +32,7 @@ def main():
     # nb_val     = 0            # Validation samples per class
     nb_cl      = 10             # Classes per group
     nb_protos  = 20             # Number of prototypes per class at the end: total protoset memory/ total number of classes
-    epochs     = 70             # Total number of epochs
+    epochs     = 5             # Total number of epochs
     lr_old     = 2.             # Initial learning rate
     lr_strat   = [49, 63]       # Epochs where learning rate gets decreased
     lr_factor  = 5.             # Learning rate decrease factor
