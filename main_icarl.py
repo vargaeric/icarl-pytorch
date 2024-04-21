@@ -32,7 +32,7 @@ def main():
     # nb_val     = 0            # Validation samples per class
     nb_cl      = 10             # Classes per group
     nb_protos  = 20             # Number of prototypes per class at the end: total protoset memory/ total number of classes
-    epochs     = 5             # Total number of epochs
+    epochs     = 1             # Total number of epochs
     lr_old     = 2.             # Initial learning rate
     lr_strat   = [49, 63]       # Epochs where learning rate gets decreased
     lr_factor  = 5.             # Learning rate decrease factor
@@ -202,7 +202,16 @@ def main():
                 # Lines 160-163: Distillation
                 if task_idx > 0:
                     prediction_old = func_pred(patterns)
+                    print('================')
+                    print(task_info.prev_classes)
+                    # print(len(targets))
+                    # print(type(targets))
+                    # print(targets.shape)
+                    # print(type(targets[0]))
+                    # print(targets[0].shape)
                     targets[:, task_info.prev_classes] = prediction_old[:, task_info.prev_classes]
+                    # print(len(targets))
+                    print('================')
                     train_err += train_fn(patterns, targets)
 
                 if (train_batches % 100) == 1:

@@ -46,6 +46,16 @@ def icarl_accuracy_measure(test_dataset: Dataset, class_means: Tensor,
             # Lines 191-195: Compute score for iCaRL
             sqd = torch.cdist(class_means[:, :, 0].T, pred_inter)
             score_icarl = (-sqd).T
+
+            print('-------------------------------')
+            print(type(class_means[:, :, 1]))
+            print(class_means[:, :, 1].shape)
+            print(class_means[:, :, 1])
+            print(type(pred_inter))
+            print(pred_inter.shape)
+            print(pred_inter)
+            print('-------------------------------')
+
             # Compute score for NCM
             sqd = torch.cdist(class_means[:, :, 1].T, pred_inter)
             score_ncm = (-sqd).T

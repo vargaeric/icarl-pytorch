@@ -34,6 +34,8 @@ def get_data_per_tasks():
 
     print('Grouping training data per tasks...')
 
+    # TODO: maybe they shouldn't be tuples
+
     for (feature, target) in all_train_data:
         target_index_in_class_order = class_order.index(target)
         task_nr = int(target_index_in_class_order / 10)  # 10 is the tasks_nr number?

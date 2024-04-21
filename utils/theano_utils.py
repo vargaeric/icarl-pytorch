@@ -74,10 +74,6 @@ def make_theano_training_function(model: Module, criterion: Module, optimizer: O
         y = y.to(device)
 
     output = model(x)
-    print('++++++++++++++++++++++++++++++')
-    print(output.shape)
-    print(y.shape)
-    print('++++++++++++++++++++++++++++++')
     loss: Tensor = criterion(output, y)
     loss.backward()
     optimizer.step()
